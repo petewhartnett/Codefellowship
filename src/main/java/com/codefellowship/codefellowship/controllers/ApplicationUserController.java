@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class ApplicationUserController {
 
 
-
+    // followed along with the video from class 16, as well as referenced the class 16 demo for this project
     @Autowired
     ApplicationUserRepository applicationUserRepository;
 
@@ -30,6 +30,8 @@ public class ApplicationUserController {
 
         //this will save to the database
         applicationUserRepository.save(createNew);
+
+        // The TA gave me the two lines below when we were troubleshooting an issue with database
         Authentication authentication = new UsernamePasswordAuthenticationToken(createNew, null, new ArrayList<>());
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
