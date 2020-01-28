@@ -1,6 +1,5 @@
 # Codefellowship
 
-## SONGR APP
 
 Citations -  Codefellows 401 class 16 video and demo were referenced for this lab. 
 
