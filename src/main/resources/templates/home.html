@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome To Codefellowship!</title>
+    <link rel="stylesheet" type="text/css" href = "/style.css">
 </head>
 <body>
 <h1>Welcome To Codefellowship!</h1>
@@ -12,10 +13,17 @@
 <h2>New Users Sign Up Right Here</h2>
 
 <form action="/signup" method="post">
-    NAME: <input type="username" name="username">
+    <ul>
+
+    USERNAME: <input type="username" name="username">
     PASSWORD<input type="password" name="password">
+    FIRST NAME<input type="firstName" name="firstName">
+    LAST NAME<input type="secondName" name="secondName">
+    BIRTHDATE<input type="birthdate" name="birthdate">
+    BIO<input type="bio" name="bio">
     <input type="submit">
 
+    </ul>
     <a href="/login">Already a user? Login Here</a>
 
 </form>

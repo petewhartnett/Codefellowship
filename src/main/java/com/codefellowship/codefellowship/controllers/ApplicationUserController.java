@@ -28,8 +28,8 @@ public class ApplicationUserController {
     @Autowired private PasswordEncoder passwordEncoder;
 
     @PostMapping("/signup")
-    public RedirectView createNewApplicationUser(String username, String password){
-        ApplicationUser createNew = new ApplicationUser(username, passwordEncoder.encode(password));
+    public RedirectView createNewApplicationUser(String username, String password, String birthdate,String firstName,String secondName, String bio){
+        ApplicationUser createNew = new ApplicationUser(username, passwordEncoder.encode(password),birthdate,firstName,secondName,bio);
 
         //this will save to the database
         applicationUserRepository.save(createNew);

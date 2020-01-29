@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href = "/style.css">
 </head>
 <body>
 
@@ -17,9 +18,9 @@
 
 
 <form action="/detailPage" method="POST">
-<input type="hidden" th:value="${userName}" name="username">;
+<input type="hidden" th:value="${userName}" name="username">
 
-Whats on your mind? New Post Here: <input type = "text" name="body">
+Whats on your mind? Post Here: <input type = "text" name="body">
  <input type="submit">
 
 </form>
