@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 
 // followed along with the video from class 16, 17 as well as referenced the class 16,17 demo for this project
@@ -19,6 +20,7 @@ public class ApplicationUser implements UserDetails {
     // a list of all posts by the user using one to many
     @OneToMany(mappedBy = "applicationUser")
     List<Post> post;
+
 
     //getter
     public List<Post>getPost(){
@@ -47,6 +49,28 @@ public class ApplicationUser implements UserDetails {
 
     public ApplicationUser() {};
 
+
+
+
+    @ManyToMany
+    @JoinTable(
+            name="following",
+            joinColumns = { @JoinColumn(name="person_following")},
+            inverseJoinColumns = {@JoinColumn(name="follower")}
+    )
+    Set<ApplicationUser> followedUsers;
+    @ManyToMany(mappedBy = "followedUsers")
+    Set<ApplicationUser> usersFollowingMe;
+
+    public void followUser(ApplicationUser personIamFollowing){
+
+        followedUsers.add(personIamFollowing);
+
+    }
+
+
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
@@ -57,6 +81,10 @@ public class ApplicationUser implements UserDetails {
     public String getPassword() {
 
         return this.password;
+    }
+
+    public long getId() {
+        return id;
     }
 
     @Override

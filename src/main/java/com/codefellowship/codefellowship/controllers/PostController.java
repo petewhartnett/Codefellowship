@@ -29,8 +29,8 @@ public class PostController {
         postRepository.save(newPost);
         return new RedirectView("/userDetails" );
 
-
     }
+
 
 
 }
