@@ -1,6 +1,7 @@
 package com.codefellowship.codefellowship.models;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Post {
@@ -12,6 +13,7 @@ public class Post {
     @ManyToOne
     ApplicationUser applicationUser;
 
+
     String body;
 
     public Post (ApplicationUser applicationUser, String body ){
@@ -19,6 +21,7 @@ public class Post {
         this.body = body;
 
     }
+
 
     public Post(){
 

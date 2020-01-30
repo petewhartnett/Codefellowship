@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.persistence.Id;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class ApplicationUserController {
@@ -28,8 +30,8 @@ public class ApplicationUserController {
     @Autowired private PasswordEncoder passwordEncoder;
 
     @PostMapping("/signup")
-    public RedirectView createNewApplicationUser(String username, String password){
-        ApplicationUser createNew = new ApplicationUser(username, passwordEncoder.encode(password));
+    public RedirectView createNewApplicationUser(String username, String password, String birthdate,String firstName,String secondName, String bio){
+        ApplicationUser createNew = new ApplicationUser(username, passwordEncoder.encode(password),birthdate,firstName,secondName,bio);
 
         //this will save to the database
         applicationUserRepository.save(createNew);
@@ -50,15 +52,44 @@ public class ApplicationUserController {
 
    @GetMapping("/userDetails")
     public String getOneUsersDetails( Principal principal, Model model){
-        ApplicationUser oneUser = applicationUserRepository.findByUsername(principal.getName());
+        ApplicationUser loggedInUser = applicationUserRepository.findByUsername(principal.getName());
+       List<ApplicationUser> usersList = applicationUserRepository.findAll();
+       usersList.remove(loggedInUser);
 
-        model.addAttribute("userName", oneUser.getUsername());
-        model.addAttribute("userId", oneUser.id);
-        model.addAttribute("user", oneUser);
+        model.addAttribute("user", loggedInUser);
+        model.addAttribute("userList", usersList);
         return "userDetails";
 
+    }
 
-   }
+    @GetMapping("/directory")
+    public String userDirectory(Principal principal, Model model){
+        ApplicationUser loggedInUser = applicationUserRepository.findByUsername(principal.getName());
+        List<ApplicationUser> usersList = applicationUserRepository.findAll();
+        usersList.remove(loggedInUser);
+
+        model.addAttribute("user", loggedInUser);
+        model.addAttribute("userList", usersList);
+        return "directory";
 
 
-}
+
+
+    }
+
+
+    @GetMapping("/users/{id}")
+    public String getaUsersDetails(@PathVariable long id, Principal principal, Model model) {
+        ApplicationUser differentUser = applicationUserRepository.findById(id).get();
+
+
+        model.addAttribute("userProfile", differentUser);
+
+        return "profile";
+
+
+    }
+
+
+
+    }
