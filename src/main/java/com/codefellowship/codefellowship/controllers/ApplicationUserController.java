@@ -43,6 +43,14 @@ public class ApplicationUserController {
         return new RedirectView("/login");
     }
 
+    @PostMapping("/userFollow")
+    public RedirectView followUser(Principal p, String userFollowUsername){
+        ApplicationUser loggedInUser = applicationUserRepository.findByUsername(p.getName());
+        ApplicationUser personBeingFollowed = applicationUserRepository.findByUsername(userFollowUsername);
+        loggedInUser.followedUsers.add(personBeingFollowed);
+        applicationUserRepository.save(loggedInUser);
+        return new RedirectView("/userDetails");
+    }
 
     @GetMapping("/login")
     public String showLoginForm(){
@@ -53,15 +61,22 @@ public class ApplicationUserController {
    @GetMapping("/userDetails")
     public String getOneUsersDetails( Principal principal, Model model){
         ApplicationUser loggedInUser = applicationUserRepository.findByUsername(principal.getName());
-       List<ApplicationUser> usersList = applicationUserRepository.findAll();
-       usersList.remove(loggedInUser);
 
         model.addAttribute("user", loggedInUser);
-        model.addAttribute("userList", usersList);
+
         return "userDetails";
 
     }
 
+    @GetMapping("/newsfeed")
+    public String newsFeed( Principal principal, Model model){
+        ApplicationUser loggedInUser = applicationUserRepository.findByUsername(principal.getName());
+
+        model.addAttribute("user", loggedInUser);
+
+        return "newsfeed";
+
+    }
     @GetMapping("/directory")
     public String userDirectory(Principal principal, Model model){
         ApplicationUser loggedInUser = applicationUserRepository.findByUsername(principal.getName());
@@ -73,9 +88,8 @@ public class ApplicationUserController {
         return "directory";
 
 
-
-
     }
+
 
 
     @GetMapping("/users/{id}")

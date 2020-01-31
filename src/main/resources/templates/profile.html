@@ -11,6 +11,8 @@
 <h1> Welcome to [[${userProfile.username}]]'s page!</h1>
 <a href="/directory">directory</a>
 <a href="/">Log Out</a>
+<h3>[[${userProfile.username}]]'s Followers</h3>
+
 
 <h3>[[${userProfile.username}]]'s Posts</h3>
 <ul>
@@ -18,6 +20,15 @@
         <p>[[${post.body}]]</p>
     </li>
 </ul>
+
+
+
+<form action="/userFollow" method="POST">
+
+    <input type="hidden" name="userFollowUsername" th:value="${userProfile.username}">
+
+    <input type="submit" value = "FOLLOW">
+</form>
 
 
 </body>

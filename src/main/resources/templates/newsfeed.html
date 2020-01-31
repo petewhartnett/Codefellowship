@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href = "/style.css">
+</head>
+<body>
+
+
+<h1> Welcome to your news feed!</h1>
+<a href="/directory">Users Directory</a>
+<a href="/">Log Out</a>
+<a href="/userDetails">Profile</a>
+
+<!-- TA helped me set up the th:block -->
+<h3>NEWS FEED</h3>
+<th:block th:each="users: ${user.followedUsers}">
+    <div>
+        <th:block th:each="posts : ${users.post}">
+
+            <p>[[${users.username}]]</p>
+            <p>[[${posts.body}]]</p>
+        </th:block>
+    </div>
+</th:block>
+
+
+
+
+</body>
+</html>
