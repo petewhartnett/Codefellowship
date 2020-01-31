@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -11,8 +11,16 @@
 <h1> Welcome to [[${user.username}]]'s page!</h1>
 <a href="/directory">directory</a>
 <a href="/">Log Out</a>
+<a href="/newsfeed">News Feed</a>
 
+<!-- TA helped me set up the th:block -->
+<h3>Users Followed</h3>
+<th:block th:each="users: ${user.followedUsers}">
+    [[${users.username}]]
+
+</th:block>
 <h3>[[${user.username}]]'s Posts</h3>
+
 <ul>
     <li th:each="post: ${user.post}" >
         <p>[[${post.body}]]</p>

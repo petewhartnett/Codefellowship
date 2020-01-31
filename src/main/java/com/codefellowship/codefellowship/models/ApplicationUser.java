@@ -58,16 +58,9 @@ public class ApplicationUser implements UserDetails {
             joinColumns = { @JoinColumn(name="person_following")},
             inverseJoinColumns = {@JoinColumn(name="follower")}
     )
-    Set<ApplicationUser> followedUsers;
+    public Set<ApplicationUser>followedUsers ;
     @ManyToMany(mappedBy = "followedUsers")
-    Set<ApplicationUser> usersFollowingMe;
-
-    public void followUser(ApplicationUser personIamFollowing){
-
-        followedUsers.add(personIamFollowing);
-
-    }
-
+   public  Set<ApplicationUser>usersThatFollowMe ;
 
 
 
